@@ -98,7 +98,7 @@ export default function SolarGenius() {
                 onClick={() => setIsOpen(!isOpen)}
                 whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.93 }}
-                className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-saffron text-zinc-950 shadow-[0_0_30px_rgba(254,212,32,0.3)] flex items-center justify-center cursor-pointer transition-shadow hover:shadow-[0_0_40px_rgba(254,212,32,0.5)]"
+                className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-saffron text-zinc-950 shadow-[0_0_30px_rgba(254,212,32,0.3)] flex items-center justify-center cursor-pointer transition-shadow hover:shadow-[0_0_40px_rgba(254,212,32,0.5)]"
                 aria-label={isOpen ? "Close Solar Genius" : "Open Solar Genius"}
             >
                 <AnimatePresence mode="wait">
@@ -145,8 +145,8 @@ export default function SolarGenius() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
                         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
-                        className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-48px)] rounded-2xl border border-zinc-800/50 bg-zinc-950/95 backdrop-blur-xl shadow-2xl overflow-hidden flex flex-col"
-                        style={{ maxHeight: "min(520px, calc(100vh - 140px))" }}
+                        className="fixed bottom-24 right-4 sm:right-6 z-50 w-[320px] sm:w-[360px] max-w-[calc(100vw-32px)] sm:max-w-[calc(100vw-48px)] rounded-2xl border border-zinc-800/50 bg-zinc-950/95 backdrop-blur-xl shadow-2xl overflow-hidden flex flex-col"
+                        style={{ maxHeight: "min(480px, calc(100vh - 120px))" }}
                     >
                         {/* Header */}
                         <div className="px-5 py-4 border-b border-zinc-800/40 flex items-center gap-3 shrink-0">

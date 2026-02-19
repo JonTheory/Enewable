@@ -104,7 +104,7 @@ export default function Team() {
                 </motion.div>
 
                 {/* Team Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
                     {team.map((member, i) => (
                         <motion.div
                             key={member.name}
@@ -132,7 +132,7 @@ export default function Team() {
                             </p>
 
                             {/* Credentials */}
-                            <p className="text-[10px] text-zinc-500 italic mb-2">
+                            <p className="text-[10px] sm:text-[11px] text-zinc-500 italic mb-2">
                                 {member.credentials}
                             </p>
 

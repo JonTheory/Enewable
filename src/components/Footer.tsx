@@ -53,7 +53,7 @@ export default function Footer() {
                         </div>
 
                         {/* Quick Links */}
-                        <div className="flex flex-col sm:flex-row gap-8 sm:gap-14">
+                        <div className="flex flex-col md:flex-row gap-8 md:gap-14">
                             <div>
                                 <p className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-3">
                                     Navigate

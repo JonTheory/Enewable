@@ -97,7 +97,7 @@ export default function Team() {
                         The People Behind{" "}
                         <span className="text-saffron">Enewable.</span>
                     </h2>
-                    <p className="mt-4 max-w-lg mx-auto text-zinc-500 text-base sm:text-lg">
+                    <p className="mt-4 max-w-lg mx-auto text-zinc-300 text-base sm:text-lg">
                         Experienced professionals dedicated to powering Johannesburg&apos;s
                         transition to clean energy.
                     </p>
@@ -132,12 +132,12 @@ export default function Team() {
                             </p>
 
                             {/* Credentials */}
-                            <p className="text-[10px] sm:text-[11px] text-zinc-500 italic mb-2">
+                            <p className="text-[10px] sm:text-[11px] text-zinc-300 italic mb-2">
                                 {member.credentials}
                             </p>
 
                             {/* Bio */}
-                            <p className="text-[11px] text-zinc-600 leading-relaxed">
+                            <p className="text-[11px] text-zinc-300 leading-relaxed">
                                 {member.bio}
                             </p>
 

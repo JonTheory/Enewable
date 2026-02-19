@@ -218,7 +218,7 @@ export default function SolarGenius() {
                                     <button
                                         key={q}
                                         onClick={() => handleSend(q)}
-                                        className="px-3 py-1.5 text-[11px] rounded-full border border-zinc-800/50 text-zinc-500 hover:text-saffron hover:border-saffron/30 transition-all cursor-pointer"
+                                        className="px-3 py-1.5 text-[11px] rounded-full border border-zinc-800/50 text-zinc-300 hover:text-saffron hover:border-saffron/30 transition-all cursor-pointer"
                                     >
                                         {q}
                                     </button>
@@ -244,7 +244,7 @@ export default function SolarGenius() {
                                 disabled={!input.trim()}
                                 whileTap={{ scale: 0.9 }}
                                 className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors cursor-pointer
-                  ${input.trim() ? "bg-saffron text-zinc-950" : "bg-zinc-800 text-zinc-600"}`}
+                  ${input.trim() ? "bg-saffron text-zinc-950" : "bg-zinc-800 text-zinc-300"}`}
                             >
                                 <svg
                                     className="w-3.5 h-3.5"

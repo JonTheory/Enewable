@@ -138,7 +138,7 @@ export default function ROICalculator() {
                         See What You&apos;ll{" "}
                         <span className="text-saffron">Save.</span>
                     </h2>
-                    <p className="mt-4 max-w-lg mx-auto text-zinc-500 text-base sm:text-lg">
+                    <p className="mt-4 max-w-lg mx-auto text-zinc-300 text-base sm:text-lg">
                         Slide to your current Eskom bill and watch the numbers work in your
                         favour. Based on Johannesburg&apos;s average 2,500+ sun hours per year.
                     </p>
@@ -153,18 +153,18 @@ export default function ROICalculator() {
                     <div className="mb-10">
                         <div className="flex items-end justify-between mb-6">
                             <div>
-                                <p className="text-xs text-zinc-600 uppercase tracking-wider mb-1">
+                                <p className="text-xs text-zinc-300 uppercase tracking-wider mb-1">
                                     Current Monthly Eskom Bill
                                 </p>
                                 <p className="font-heading text-4xl sm:text-5xl font-bold text-white">
                                     {formatZAR(monthlyBill)}
-                                    <span className="text-lg font-normal text-zinc-600 ml-1">
+                                    <span className="text-lg font-normal text-zinc-300 ml-1">
                                         /mo
                                     </span>
                                 </p>
                             </div>
                             <div className="text-right">
-                                <p className="text-xs text-zinc-600 uppercase tracking-wider mb-1">
+                                <p className="text-xs text-zinc-300 uppercase tracking-wider mb-1">
                                     Eskom Increase Rate
                                 </p>
                                 <p className="font-heading text-lg font-semibold text-red-400/80">
@@ -239,7 +239,7 @@ export default function ROICalculator() {
                             <p className="font-heading text-2xl sm:text-3xl font-bold text-emerald-400">
                                 {formatZAR(results.monthlySaving)}
                             </p>
-                            <p className="mt-1 text-[10px] sm:text-[11px] text-zinc-600 uppercase tracking-wider">
+                            <p className="mt-1 text-[10px] sm:text-[11px] text-zinc-300 uppercase tracking-wider">
                                 Monthly Savings
                             </p>
                         </div>
@@ -255,7 +255,7 @@ export default function ROICalculator() {
                             <p className="font-heading text-2xl sm:text-3xl font-bold text-white">
                                 {formatZAR(results.annualSaving)}
                             </p>
-                            <p className="mt-1 text-[10px] sm:text-[11px] text-zinc-600 uppercase tracking-wider">
+                            <p className="mt-1 text-[10px] sm:text-[11px] text-zinc-300 uppercase tracking-wider">
                                 Annual Savings
                             </p>
                         </div>
@@ -269,11 +269,11 @@ export default function ROICalculator() {
                             </div>
                             <p className="font-heading text-2xl sm:text-3xl font-bold text-white">
                                 {results.paybackYears}
-                                <span className="text-base font-normal text-zinc-500">y </span>
+                                <span className="text-base font-normal text-zinc-300">y </span>
                                 {results.paybackRemainderMonths}
-                                <span className="text-base font-normal text-zinc-500">m</span>
+                                <span className="text-base font-normal text-zinc-300">m</span>
                             </p>
-                            <p className="mt-1 text-[10px] sm:text-[11px] text-zinc-600 uppercase tracking-wider">
+                            <p className="mt-1 text-[10px] sm:text-[11px] text-zinc-300 uppercase tracking-wider">
                                 Payback Period
                             </p>
                         </div>
@@ -298,13 +298,13 @@ export default function ROICalculator() {
                     {/* ─── 25-Year Projection ─── */}
                     <div className="mt-8 rounded-xl bg-gradient-to-r from-zinc-900/80 to-zinc-900/40 border border-zinc-800/30 p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div>
-                            <p className="text-xs text-zinc-600 uppercase tracking-wider mb-1">
+                            <p className="text-xs text-zinc-300 uppercase tracking-wider mb-1">
                                 Projected {PROJECTION_YEARS}-Year Savings
                             </p>
                             <p className="font-heading text-3xl sm:text-4xl font-bold text-white">
                                 {formatZAR(results.totalSavings)}
                             </p>
-                            <p className="text-xs text-zinc-600 mt-1">
+                            <p className="text-xs text-zinc-300 mt-1">
                                 Accounting for {ESKOM_ANNUAL_INCREASE}% annual Eskom tariff increases
                             </p>
                         </div>

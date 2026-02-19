@@ -117,7 +117,7 @@ export default function ProcessSection() {
                         From Assessment to{" "}
                         <span className="text-saffron">Independence.</span>
                     </h2>
-                    <p className="mt-4 max-w-lg mx-auto text-zinc-500 text-base sm:text-lg">
+                    <p className="mt-4 max-w-lg mx-auto text-zinc-300 text-base sm:text-lg">
                         Four simple steps between you and energy freedom. We handle
                         everything from start to finish.
                     </p>
@@ -158,7 +158,7 @@ export default function ProcessSection() {
                                 </h3>
 
                                 {/* Description */}
-                                <p className="text-sm text-zinc-500 leading-relaxed max-w-[240px]">
+                                <p className="text-sm text-zinc-300 leading-relaxed max-w-[240px]">
                                     {step.description}
                                 </p>
                             </motion.div>

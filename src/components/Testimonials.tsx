@@ -91,7 +91,7 @@ export default function Testimonials() {
                         Joburg Homeowners{" "}
                         <span className="text-saffron">Love Their Solar.</span>
                     </h2>
-                    <p className="mt-4 max-w-lg text-zinc-500 text-base sm:text-lg">
+                    <p className="mt-4 max-w-lg text-zinc-300 text-base sm:text-lg">
                         Don&apos;t take our word for it. Here&apos;s what our clients have to say after
                         going solar.
                     </p>
@@ -161,7 +161,7 @@ export default function Testimonials() {
                                 )}
                                 <div>
                                     <p className="text-sm font-semibold text-white">{t.name}</p>
-                                    <p className="text-[11px] text-zinc-600">
+                                    <p className="text-[11px] text-zinc-300">
                                         {t.suburb} · {t.system}
                                     </p>
                                 </div>

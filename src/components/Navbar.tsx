@@ -75,7 +75,7 @@ export default function Navbar() {
                                 <a
                                     key={link.href}
                                     href={link.href}
-                                    className="relative px-4 py-2 text-sm text-zinc-400 hover:text-white transition-colors duration-200 group"
+                                    className="relative px-4 py-2 text-sm text-zinc-300 hover:text-white transition-colors duration-200 group"
                                 >
                                     {link.label}
                                     <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-saffron/60 group-hover:w-3/4 transition-all duration-300" />
@@ -96,7 +96,7 @@ export default function Navbar() {
                         {/* ─── Mobile Hamburger ─── */}
                         <button
                             onClick={() => setMobileOpen(!mobileOpen)}
-                            className="md:hidden relative w-10 h-10 flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
+                            className="md:hidden relative w-10 h-10 flex items-center justify-center text-zinc-300 hover:text-white transition-colors"
                             aria-label="Toggle menu"
                         >
                             <div className="w-5 flex flex-col gap-1.5">
@@ -172,7 +172,7 @@ export default function Navbar() {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.5 }}
-                                className="absolute bottom-12 text-xs text-zinc-600 tracking-wide"
+                                className="absolute bottom-12 text-xs text-zinc-300 tracking-wide"
                             >
                                 ⚡ Powering 400+ Gauteng Homes
                             </motion.p>

@@ -143,7 +143,7 @@ export default function FeaturesSection() {
                         <span className="text-saffron">Joburg Powered.</span>
                     </h2>
 
-                    <p className="mt-4 max-w-xl text-zinc-500 text-base sm:text-lg leading-relaxed">
+                    <p className="mt-4 max-w-xl text-zinc-300 text-base sm:text-lg leading-relaxed">
                         Every component is selected and sized for South African conditions —
                         high irradiance, volatile grid supply, and the demand for
                         uninterrupted power.
@@ -175,7 +175,7 @@ export default function FeaturesSection() {
                             </h3>
 
                             {/* Description */}
-                            <p className="text-sm text-zinc-500 leading-relaxed flex-1">
+                            <p className="text-sm text-zinc-300 leading-relaxed flex-1">
                                 {feature.description}
                             </p>
 
@@ -186,7 +186,7 @@ export default function FeaturesSection() {
                                         <p className="text-lg font-bold font-heading text-white">
                                             {stat.value}
                                         </p>
-                                        <p className="text-[11px] text-zinc-600 uppercase tracking-wider">
+                                        <p className="text-[11px] text-zinc-300 uppercase tracking-wider">
                                             {stat.label}
                                         </p>
                                     </div>
@@ -205,7 +205,7 @@ export default function FeaturesSection() {
                 {/* Bottom trust bar */}
                 <motion.div
                     variants={headerVariants}
-                    className="mt-14 sm:mt-20 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs text-zinc-600 tracking-wide"
+                    className="mt-14 sm:mt-20 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs text-zinc-300 tracking-wide"
                 >
                     <span className="flex items-center gap-2">
                         <svg className="w-3.5 h-3.5 text-saffron/40" fill="currentColor" viewBox="0 0 20 20">

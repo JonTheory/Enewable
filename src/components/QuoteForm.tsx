@@ -121,7 +121,7 @@ export default function QuoteForm() {
                         Get Your Custom{" "}
                         <span className="text-saffron">Solar Quote.</span>
                     </h2>
-                    <p className="mt-4 max-w-lg text-zinc-500 text-base sm:text-lg">
+                    <p className="mt-4 max-w-lg text-zinc-300 text-base sm:text-lg">
                         Tell us about your property. We&apos;ll design a system sized for
                         your Eskom bill, roof, and load shedding needs — obligation-free.
                     </p>
@@ -140,7 +140,7 @@ export default function QuoteForm() {
                         >
                             {/* ─── Step 1: Property Type ─── */}
                             <motion.fieldset variants={fadeUp}>
-                                <legend className="text-sm font-medium text-zinc-400 mb-4 flex items-center gap-2">
+                                <legend className="text-sm font-medium text-zinc-300 mb-4 flex items-center gap-2">
                                     <span className="flex items-center justify-center w-6 h-6 rounded-full bg-saffron/10 text-saffron text-xs font-bold">
                                         1
                                     </span>
@@ -160,7 +160,7 @@ export default function QuoteForm() {
                                         >
                                             <span className="text-2xl mb-2 block">{p.icon}</span>
                                             <span
-                                                className={`text-sm font-medium ${property === p.id ? "text-white" : "text-zinc-400"
+                                                className={`text-sm font-medium ${property === p.id ? "text-white" : "text-zinc-300"
                                                     }`}
                                             >
                                                 {p.label}
@@ -193,7 +193,7 @@ export default function QuoteForm() {
 
                             {/* ─── Step 2: Monthly Bill ─── */}
                             <motion.fieldset variants={fadeUp}>
-                                <legend className="text-sm font-medium text-zinc-400 mb-4 flex items-center gap-2">
+                                <legend className="text-sm font-medium text-zinc-300 mb-4 flex items-center gap-2">
                                     <span className="flex items-center justify-center w-6 h-6 rounded-full bg-saffron/10 text-saffron text-xs font-bold">
                                         2
                                     </span>
@@ -208,7 +208,7 @@ export default function QuoteForm() {
                                             className={`px-4 py-2.5 rounded-lg text-sm font-medium border transition-all duration-200 cursor-pointer
                         ${bill === range
                                                     ? "border-saffron/50 bg-saffron/10 text-saffron"
-                                                    : "border-zinc-800/60 bg-zinc-900/40 text-zinc-500 hover:border-zinc-700/60 hover:text-zinc-300"
+                                                    : "border-zinc-800/60 bg-zinc-900/40 text-zinc-300 hover:border-zinc-700/60 hover:text-zinc-300"
                                                 }`}
                                         >
                                             {range}
@@ -219,7 +219,7 @@ export default function QuoteForm() {
 
                             {/* ─── Step 3: Contact Details ─── */}
                             <motion.fieldset variants={fadeUp}>
-                                <legend className="text-sm font-medium text-zinc-400 mb-4 flex items-center gap-2">
+                                <legend className="text-sm font-medium text-zinc-300 mb-4 flex items-center gap-2">
                                     <span className="flex items-center justify-center w-6 h-6 rounded-full bg-saffron/10 text-saffron text-xs font-bold">
                                         3
                                     </span>
@@ -231,7 +231,7 @@ export default function QuoteForm() {
                                         placeholder="Full Name *"
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
-                                        className="w-full px-4 py-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/50 text-white placeholder:text-zinc-600 text-sm focus:outline-none focus:border-saffron/40 focus:ring-1 focus:ring-saffron/20 transition-all"
+                                        className="w-full px-4 py-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/50 text-white placeholder:text-zinc-300 text-sm focus:outline-none focus:border-saffron/40 focus:ring-1 focus:ring-saffron/20 transition-all"
                                         required
                                     />
                                     <input
@@ -239,21 +239,21 @@ export default function QuoteForm() {
                                         placeholder="Email Address *"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className="w-full px-4 py-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/50 text-white placeholder:text-zinc-600 text-sm focus:outline-none focus:border-saffron/40 focus:ring-1 focus:ring-saffron/20 transition-all"
+                                        className="w-full px-4 py-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/50 text-white placeholder:text-zinc-300 text-sm focus:outline-none focus:border-saffron/40 focus:ring-1 focus:ring-saffron/20 transition-all"
                                     />
                                     <input
                                         type="tel"
                                         placeholder="Phone (e.g. 082 xxx xxxx)"
                                         value={phone}
                                         onChange={(e) => setPhone(e.target.value)}
-                                        className="w-full px-4 py-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/50 text-white placeholder:text-zinc-600 text-sm focus:outline-none focus:border-saffron/40 focus:ring-1 focus:ring-saffron/20 transition-all"
+                                        className="w-full px-4 py-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/50 text-white placeholder:text-zinc-300 text-sm focus:outline-none focus:border-saffron/40 focus:ring-1 focus:ring-saffron/20 transition-all"
                                     />
                                     <input
                                         type="text"
                                         placeholder="Suburb / Area (e.g. Sandton)"
                                         value={area}
                                         onChange={(e) => setArea(e.target.value)}
-                                        className="w-full px-4 py-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/50 text-white placeholder:text-zinc-600 text-sm focus:outline-none focus:border-saffron/40 focus:ring-1 focus:ring-saffron/20 transition-all"
+                                        className="w-full px-4 py-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/50 text-white placeholder:text-zinc-300 text-sm focus:outline-none focus:border-saffron/40 focus:ring-1 focus:ring-saffron/20 transition-all"
                                     />
                                 </div>
                             </motion.fieldset>
@@ -268,7 +268,7 @@ export default function QuoteForm() {
                                     className={`px-8 py-4 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center gap-2.5
                     ${isValid
                                             ? "bg-saffron text-zinc-950 hover:shadow-saffron-md cursor-pointer"
-                                            : "bg-zinc-800 text-zinc-600 cursor-not-allowed"
+                                            : "bg-zinc-800 text-zinc-300 cursor-not-allowed"
                                         }`}
                                 >
                                     {sending ? (
@@ -346,13 +346,13 @@ export default function QuoteForm() {
                             <h3 className="font-heading text-2xl sm:text-3xl font-bold text-white mb-3">
                                 Quote Request Received!
                             </h3>
-                            <p className="text-zinc-400 max-w-md mx-auto">
+                            <p className="text-zinc-300 max-w-md mx-auto">
                                 Our solar team will design a custom system for your{" "}
                                 {PROPERTY_TYPES.find((p) => p.id === property)?.label.toLowerCase() ?? "property"}{" "}
                                 and send you a detailed proposal within{" "}
                                 <span className="text-saffron font-medium">24 hours</span>.
                             </p>
-                            <div className="mt-6 flex flex-wrap justify-center gap-4 text-xs text-zinc-600">
+                            <div className="mt-6 flex flex-wrap justify-center gap-4 text-xs text-zinc-300">
                                 <span className="flex items-center gap-1.5">
                                     <svg className="w-3.5 h-3.5 text-saffron/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />

@@ -162,7 +162,7 @@ export default function HeroSection() {
                 {/* Sub-headline */}
                 <motion.p
                     variants={fadeUp}
-                    className="mt-6 max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-zinc-400 leading-relaxed"
+                    className="mt-6 max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-zinc-300 leading-relaxed"
                 >
                     The sunniest city in the world deserves better energy.{" "}
                     <span className="text-zinc-200">
@@ -233,7 +233,7 @@ export default function HeroSection() {
                 {/* Trust Indicator */}
                 <motion.p
                     variants={fadeIn}
-                    className="mt-6 text-xs text-zinc-600 tracking-wide"
+                    className="mt-6 text-xs text-zinc-300 tracking-wide"
                 >
                     ⚡ Trusted by 400+ Gauteng homeowners &nbsp;•&nbsp; SABS Approved
                     Installations
@@ -257,12 +257,12 @@ export default function HeroSection() {
                             <p className="text-2xl sm:text-3xl font-bold font-heading text-white">
                                 {stat.value}
                                 {stat.unit && (
-                                    <span className="text-sm font-normal text-zinc-500 ml-0.5">
+                                    <span className="text-sm font-normal text-zinc-300 ml-0.5">
                                         {stat.unit}
                                     </span>
                                 )}
                             </p>
-                            <p className="mt-1 text-xs text-zinc-500 uppercase tracking-wider font-medium">
+                            <p className="mt-1 text-xs text-zinc-300 uppercase tracking-wider font-medium">
                                 {stat.label}
                             </p>
                         </motion.div>
@@ -274,7 +274,7 @@ export default function HeroSection() {
                     variants={fadeIn}
                     className="mt-16 flex flex-col items-center gap-2"
                 >
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-600">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-300">
                         Explore
                     </span>
                     <motion.div

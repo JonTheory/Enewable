@@ -45,7 +45,7 @@ export default function Footer() {
                                     able
                                 </span>
                             </a>
-                            <p className="text-sm text-zinc-600 leading-relaxed">
+                            <p className="text-sm text-zinc-300 leading-relaxed">
                                 Premium solar solutions engineered for Johannesburg&apos;s
                                 unique conditions. Built to outlast load shedding and outperform
                                 Eskom tariffs. Serving Sandton, Midrand, Fourways, Centurion
@@ -56,7 +56,7 @@ export default function Footer() {
                         {/* Quick Links */}
                         <div className="flex flex-col md:flex-row gap-8 md:gap-14">
                             <div>
-                                <p className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-3">
+                                <p className="text-xs font-medium text-zinc-300 uppercase tracking-wider mb-3">
                                     Navigate
                                 </p>
                                 <ul className="space-y-2">
@@ -64,7 +64,7 @@ export default function Footer() {
                                         <li key={link.href}>
                                             <a
                                                 href={link.href}
-                                                className="text-sm text-zinc-500 hover:text-saffron transition-colors duration-200"
+                                                className="text-sm text-zinc-300 hover:text-saffron transition-colors duration-200"
                                             >
                                                 {link.label}
                                             </a>
@@ -73,14 +73,14 @@ export default function Footer() {
                                 </ul>
                             </div>
                             <div>
-                                <p className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-3">
+                                <p className="text-xs font-medium text-zinc-300 uppercase tracking-wider mb-3">
                                     Certifications
                                 </p>
                                 <ul className="space-y-2">
                                     {CERTIFICATIONS.map((cert) => (
                                         <li
                                             key={cert}
-                                            className="text-sm text-zinc-600 flex items-center gap-1.5"
+                                            className="text-sm text-zinc-300 flex items-center gap-1.5"
                                         >
                                             <svg
                                                 className="w-3 h-3 text-saffron/40"
@@ -101,10 +101,10 @@ export default function Footer() {
                                 </ul>
                             </div>
                             <div>
-                                <p className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-3">
+                                <p className="text-xs font-medium text-zinc-300 uppercase tracking-wider mb-3">
                                     Contact
                                 </p>
-                                <ul className="space-y-2 text-sm text-zinc-600">
+                                <ul className="space-y-2 text-sm text-zinc-300">
                                     <li>Johannesburg, Gauteng</li>
                                     <li>
                                         <a

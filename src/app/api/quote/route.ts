@@ -4,7 +4,10 @@ import { NextResponse } from "next/server";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Your email where you want to receive quote requests
-const YOUR_EMAIL = "johnathan@zeffkong.com"; // Update this to your actual email
+const YOUR_EMAILS = [
+    "johnathan@zeffkong.com",
+    "johnathanbagleysa@gmail.com"
+];
 
 export async function POST(request: Request) {
     try {
@@ -18,23 +21,27 @@ export async function POST(request: Request) {
             );
         }
 
-        // Email to you (the business owner)
-        await resend.emails.send({
-            from: "Enewable Solar <onboarding@resend.dev>",
-            to: YOUR_EMAIL,
-            subject: `New Quote Request from ${name}`,
-            html: `
-                <h2>New Solar Quote Request</h2>
-                <p><strong>Name:</strong> ${name}</p>
-                <p><strong>Email:</strong> ${email || "Not provided"}</p>
-                <p><strong>Phone:</strong> ${phone || "Not provided"}</p>
-                <p><strong>Area:</strong> ${area || "Not provided"}</p>
-                <p><strong>Property Type:</strong> ${property}</p>
-                <p><strong>Monthly Bill:</strong> ${bill}</p>
-                <hr>
-                <p>Submitted: ${new Date().toLocaleString("en-ZA")}</p>
-            `,
-        });
+        // Email to you (the business owner) - send to both emails
+        const emailPromises = YOUR_EMAILS.map(toEmail => 
+            resend.emails.send({
+                from: "Enewable Solar <onboarding@resend.dev>",
+                to: toEmail,
+                subject: `New Quote Request from ${name}`,
+                html: `
+                    <h2>New Solar Quote Request</h2>
+                    <p><strong>Name:</strong> ${name}</p>
+                    <p><strong>Email:</strong> ${email || "Not provided"}</p>
+                    <p><strong>Phone:</strong> ${phone || "Not provided"}</p>
+                    <p><strong>Area:</strong> ${area || "Not provided"}</p>
+                    <p><strong>Property Type:</strong> ${property}</p>
+                    <p><strong>Monthly Bill:</strong> ${bill}</p>
+                    <hr>
+                    <p>Submitted: ${new Date().toLocaleString("en-ZA")}</p>
+                `,
+            })
+        );
+        
+        await Promise.all(emailPromises);
 
         // Confirmation email to customer (if they provided email)
         if (email) {

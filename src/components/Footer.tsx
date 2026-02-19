@@ -13,7 +13,7 @@ const CERTIFICATIONS = [
     "ECSA Registered",
     "CoJ Compliant",
     "Eskom Registered",
-    "BEE Level 2",
+    "BEE Level 1",
 ] as const;
 
 export default function Footer() {
@@ -109,10 +109,10 @@ export default function Footer() {
                                     <li>Johannesburg, Gauteng</li>
                                     <li>
                                         <a
-                                            href="tel:+27110000000"
+                                            href="tel:+27829006199"
                                             className="hover:text-saffron transition-colors"
                                         >
-                                            +27 (0) 11 000 0000
+                                            Rob Bagley: +27 82 900 6199
                                         </a>
                                     </li>
                                     <li>

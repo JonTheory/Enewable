@@ -63,6 +63,7 @@ export async function POST(request: Request) {
                         <li>We'll schedule a free site assessment at your convenience</li>
                         <li>You'll receive a custom system design and quote within 2-3 days</li>
                     </ol>
+                    <p>Questions? Call Rob Bagley at <a href="tel:+27829006199">+27 82 900 6199</a></p>
                     <p>Power your independence!<br>The Enewable Team</p>
                 `,
             });

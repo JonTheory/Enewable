@@ -20,8 +20,8 @@ const team = [
     {
         name: "Johnathan Bagley",
         role: "CTO",
-        bio: "Johnathan holds a Master's in Renewable Energy and oversees our technical strategy and innovation. He ensures we stay at the forefront of solar technology, bringing the latest advances to Johannesburg homes.",
-        credentials: "MEng Renewable Energy | Technical Strategy Specialist",
+        bio: "Johnathan holds a BSc in Chemical Engineering and brings marketing expertise to our technical strategy. He ensures we stay at the forefront of solar technology, bringing the latest advances to Johannesburg homes.",
+        credentials: "BSc Chem Eng | Marketing Consultant",
         initials: "JB",
         image: null,
     },

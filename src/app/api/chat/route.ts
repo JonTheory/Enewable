@@ -13,7 +13,7 @@ COMPANY INFO:
 - We specialize in hybrid inverters, lithium-ion batteries (LiFePO4), and premium solar panel installations
 - Our team:
   - Rob Bagley (CEO/Lead Engineer): 35 years experience, Mechanical Engineering Diploma from Wits Technikon
-  - Johnathan Bagley (CTO): MEng in Renewable Energy
+  - Johnathan Bagley (CTO): BSc Chem Eng, Marketing Consultant
   - Michael van Zyl (Sales Director): BCom, Business Development
   - Leo (Solar Advisor): NABCEP Certified Solar PV Specialist
 - We handle City of Johannesburg (CoJ) and Eskom registration

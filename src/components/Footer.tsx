@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 
 const NAV_LINKS = [
     { label: "Features", href: "#features" },
+    { label: "Team", href: "/team" },
     { label: "Calculator", href: "#calculator" },
     { label: "Get Quote", href: "#quote" },
 ] as const;

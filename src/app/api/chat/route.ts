@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
+import { type SchemaType } from "@google/generative-ai";
 
 const SYSTEM_PROMPT = `You are Solar Genius, an expert solar engineer and AI advisor for Enewable, a solar company in Johannesburg, South Africa. 
 
@@ -63,12 +64,13 @@ Your role:
 - NEVER make up information - use the functions available to get accurate data`;
 
 // Tool definitions for Gemini
-const TOOLS = [
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const TOOLS: any[] = [
     {
         name: "get_current_time",
         description: "Get the current date and time. Use when users ask about time, dates, or 'today'.",
         parameters: {
-            type: "object",
+            type: "object" as SchemaType,
             properties: {},
             required: [],
         },
@@ -77,15 +79,15 @@ const TOOLS = [
         name: "get_pricing",
         description: "Get pricing information for solar systems and components. Use when users ask about costs, prices, or estimates.",
         parameters: {
-            type: "object",
+            type: "object" as SchemaType,
             properties: {
                 system_size: {
-                    type: "string",
+                    type: "string" as SchemaType,
                     description: "The system size in kW (e.g., '5kW', '10kW'). If unknown, ask the user.",
                     enum: ["3kW", "5kW", "8kW", "10kW", "15kW", "20kW", "unknown"],
                 },
                 include_battery: {
-                    type: "string",
+                    type: "string" as SchemaType,
                     description: "Whether to include battery pricing",
                     enum: ["yes", "no", "unknown"],
                 },
@@ -97,14 +99,14 @@ const TOOLS = [
         name: "calculate_savings",
         description: "Calculate estimated monthly and yearly savings based on electricity bill.",
         parameters: {
-            type: "object",
+            type: "object" as SchemaType,
             properties: {
                 monthly_bill: {
-                    type: "number",
+                    type: "number" as SchemaType,
                     description: "Monthly electricity bill in ZAR",
                 },
                 system_size: {
-                    type: "string",
+                    type: "string" as SchemaType,
                     description: "System size in kW (optional, will estimate if not provided)",
                 },
             },
@@ -115,14 +117,14 @@ const TOOLS = [
         name: "get_battery_runtime",
         description: "Calculate how long a battery will last based on load.",
         parameters: {
-            type: "object",
+            type: "object" as SchemaType,
             properties: {
                 battery_size: {
-                    type: "number",
+                    type: "number" as SchemaType,
                     description: "Battery size in kWh",
                 },
                 load_watts: {
-                    type: "number",
+                    type: "number" as SchemaType,
                     description: "Total load in watts (e.g., 2000W for typical appliances)",
                 },
             },
@@ -253,10 +255,12 @@ export async function POST(request: Request) {
         const response = result.response;
         
         // Check if model wants to call a function
-        const functionCall = response.functionCalls?.[0];
+        const functionCalls = response.functionCalls?.();
+        const functionCall = functionCalls?.[0];
 
         if (functionCall) {
             const { name, args } = functionCall;
+            const functionArgs = args as any;
             let functionResult: any;
 
             switch (name) {
@@ -264,18 +268,19 @@ export async function POST(request: Request) {
                     functionResult = getCurrentTime();
                     break;
                 case "get_pricing":
-                    functionResult = getPricing(args.system_size || "unknown", args.include_battery || "unknown");
+                    functionResult = getPricing(functionArgs.system_size || "unknown", functionArgs.include_battery || "unknown");
                     break;
                 case "calculate_savings":
-                    functionResult = calculateSavings(args.monthly_bill, args.system_size);
+                    functionResult = calculateSavings(functionArgs.monthly_bill, functionArgs.system_size);
                     break;
                 case "get_battery_runtime":
-                    functionResult = getBatteryRuntime(args.battery_size, args.load_watts);
+                    functionResult = getBatteryRuntime(functionArgs.battery_size, functionArgs.load_watts);
                     break;
             }
 
             // Send function result back to model for final response
-            const toolMessage = {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const toolMessage: any = {
                 role: "user",
                 parts: [{
                     functionResponse: {

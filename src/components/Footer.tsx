@@ -9,8 +9,8 @@ const NAV_LINKS = [
 ] as const;
 
 const CERTIFICATIONS = [
-    "SABS Approved",
-    "CoCT Compliant",
+    "ECSA Registered",
+    "CoJ Compliant",
     "Eskom Registered",
     "BEE Level 2",
 ] as const;
@@ -48,7 +48,8 @@ export default function Footer() {
                             <p className="text-sm text-zinc-600 leading-relaxed">
                                 Premium solar solutions engineered for Johannesburg&apos;s
                                 unique conditions. Built to outlast load shedding and outperform
-                                Eskom tariffs.
+                                Eskom tariffs. Serving Sandton, Midrand, Fourways, Centurion
+                                and greater Gauteng.
                             </p>
                         </div>
 
@@ -107,10 +108,10 @@ export default function Footer() {
                                     <li>Johannesburg, Gauteng</li>
                                     <li>
                                         <a
-                                            href="tel:+27000000000"
+                                            href="tel:+27110000000"
                                             className="hover:text-saffron transition-colors"
                                         >
-                                            +27 (0) 00 000 0000
+                                            +27 (0) 11 000 0000
                                         </a>
                                     </li>
                                     <li>

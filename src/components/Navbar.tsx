@@ -1,17 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-
-/* ──────────────────────────────────────────────
-   Navigation Links
-   ────────────────────────────────────────────── */
-const navLinks = [
-    { label: "Features", href: "#features" },
-    { label: "Team", href: "/team" },
-    { label: "Calculator", href: "#calculator" },
-    { label: "Quote", href: "#quote" },
-];
 
 /* ──────────────────────────────────────────────
    Component
@@ -19,6 +10,16 @@ const navLinks = [
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const pathname = usePathname();
+    const isHomePage = pathname === "/";
+
+    // Navigation links - adjust based on current page
+    const navLinks = [
+        { label: "Features", href: isHomePage ? "#features" : "/#features" },
+        { label: "Team", href: "/team" },
+        { label: "Calculator", href: isHomePage ? "#calculator" : "/#calculator" },
+        { label: "Quote", href: isHomePage ? "#quote" : "/#quote" },
+    ];
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 40);
@@ -84,7 +85,7 @@ export default function Navbar() {
 
                             {/* CTA */}
                             <motion.a
-                                href="#quote"
+                                href={isHomePage ? "#quote" : "/#quote"}
                                 whileHover={{ scale: 1.03 }}
                                 whileTap={{ scale: 0.97 }}
                                 className="ml-4 px-5 py-2 bg-saffron text-zinc-950 text-sm font-semibold rounded-lg hover:shadow-saffron-sm transition-shadow duration-300"
@@ -157,7 +158,7 @@ export default function Navbar() {
                             ))}
 
                             <motion.a
-                                href="#quote"
+                                href={isHomePage ? "#quote" : "/#quote"}
                                 onClick={() => setMobileOpen(false)}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}

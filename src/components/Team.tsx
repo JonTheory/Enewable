@@ -8,18 +8,18 @@ import { motion, useInView } from "framer-motion";
     ────────────────────────────────────────────── */
 const team = [
     {
-        name: "Johnathan Bagley",
-        role: "CTO",
-        bio: "Technical Strategy & Innovation",
-        credentials: "MEng, Renewable Energy",
-        initials: "JB",
-    },
-    {
         name: "Rob Bagley",
         role: "CEO / Lead Engineer",
         bio: "Installation & Technical Lead",
         credentials: "10+ Years Experience, ECSA Certified",
         initials: "RB",
+    },
+    {
+        name: "Johnathan Bagley",
+        role: "CTO",
+        bio: "Technical Strategy & Innovation",
+        credentials: "MEng, Renewable Energy",
+        initials: "JB",
     },
     {
         name: "Michael van Zyl",

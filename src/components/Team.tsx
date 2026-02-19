@@ -15,7 +15,7 @@ const team = [
         bio: "With 35 years of engineering experience and a Mechanical Engineering Diploma from Wits Technikon, Rob leads our technical operations and installations. His expertise in solar system design ensures every installation meets the highest standards.",
         credentials: "35 Years Experience | Mechanical Engineer Diploma (Wits) | ECSA Registered",
         initials: "RB",
-        image: null, // Add path like "/images/team/rob-bagley.jpg" when available
+        image: "/images/team/Rob.png",
     },
     {
         name: "Johnathan Bagley",

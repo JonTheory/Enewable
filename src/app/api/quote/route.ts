@@ -24,7 +24,7 @@ export async function POST(request: Request) {
         // Email to you (the business owner) - send to both emails
         const emailPromises = YOUR_EMAILS.map(toEmail => 
             resend.emails.send({
-                from: "Enewable Solar <onboarding@resend.dev>",
+                from: "Enewable Quotes <quotes@enewable.co.za>",
                 to: toEmail,
                 subject: `New Quote Request from ${name}`,
                 html: `
@@ -46,7 +46,7 @@ export async function POST(request: Request) {
         // Confirmation email to customer (if they provided email)
         if (email) {
             await resend.emails.send({
-                from: "Enewable Solar <onboarding@resend.dev>",
+                from: "Enewable Quotes <quotes@enewable.co.za>",
                 to: email,
                 subject: "We've Received Your Quote Request! 🌞",
                 html: `

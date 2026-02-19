@@ -8,13 +8,6 @@ import { motion, useInView } from "framer-motion";
     ────────────────────────────────────────────── */
 const team = [
     {
-        name: "Chris Nyawo",
-        role: "CEO",
-        bio: "Leadership & Vision",
-        credentials: "MBA, Electrical Engineering",
-        initials: "CN",
-    },
-    {
         name: "Johnathan Bagley",
         role: "CTO",
         bio: "Technical Strategy & Innovation",

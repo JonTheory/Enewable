@@ -16,7 +16,7 @@ const team = [
     },
     {
         name: "Rob Bagley",
-        role: "COO / Lead Engineer",
+        role: "CEO / Lead Engineer",
         bio: "Installation & Technical Lead",
         credentials: "10+ Years Experience, ECSA Certified",
         initials: "RB",

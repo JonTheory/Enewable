@@ -89,7 +89,8 @@ Your role:
 - Use South African spelling (grey, honour, colour, neighbour)
 - Use ZAR/Rand notation for prices
 - NEVER make up information about SA regulations - use what you know
-- Be enthusiastic about helping SA homeowners beat load shedding!`;
+- Be enthusiastic about helping SA homeowners beat load shedding!
+- NEVER use markdown formatting like ** or __ for bold text - keep it plain text only`;
 
 function getCurrentTime() {
     const now = new Date();
@@ -117,7 +118,10 @@ export async function POST(request: Request) {
         const fullPrompt = `${promptWithTime}\n\nConversation:\n${conversationHistory}\nUser: ${message}\n\nSolar Genius:`;
 
         const result = await model.generateContent(fullPrompt);
-        const response = result.response.text();
+        let response = result.response.text();
+        
+        // Remove markdown bold formatting
+        response = response.replace(/\*\*/g, '');
 
         return NextResponse.json({ response });
 

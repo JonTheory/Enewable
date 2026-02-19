@@ -2,10 +2,11 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 /* ──────────────────────────────────────────────
-   Pre-built Responses (no API needed for MVP)
-   ────────────────────────────────────────────── */
+    Quick Questions
+    ────────────────────────────────────────────── */
 const QUICK_QUESTIONS = [
     "How much can I save?",
     "Best system for load shedding?",
@@ -18,23 +19,31 @@ interface Message {
     text: string;
 }
 
-const RESPONSES: Record<string, string> = {
-    "How much can I save?":
-        "Based on average Joburg conditions, a well-sized system can offset 70-85% of your Eskom bill. For a household spending R3,500/mo, that's roughly R2,500+ in monthly savings — and with Eskom increasing tariffs by ~12% annually, those savings compound dramatically. Try our ROI Calculator above for your exact numbers! ⚡",
-    "Best system for load shedding?":
-        "For load shedding protection, I'd recommend a hybrid inverter (5-8kW) paired with a lithium-ion battery bank (10-15kWh). This keeps your essentials running through Stage 6 — lights, Wi-Fi, fridge, security, and even a TV. Our systems switch over in under 10ms, so you won't even notice the grid dropping. 🔋",
-    "What size do I need?":
-        "System size depends on your monthly consumption and goals. As a rough guide:\n\n• R1,500-R3,000 bill → 3-5kW system\n• R3,000-R6,000 bill → 5-8kW system\n• R6,000-R10,000+ bill → 8-15kW system\n\nWe'll do a free site assessment — checking your roof orientation, shading, and DB board — to size it perfectly. Request a quote and we'll handle the rest! 🏠",
-    "How long is installation?":
-        "A typical residential installation takes 1-2 days for a standard system. Here's the timeline:\n\n• Site assessment: same week\n• Custom design: 2-3 days\n• Equipment delivery: 5-7 days\n• Installation: 1-2 days\n• CoCT/Eskom registration: 2-4 weeks\n\nWe handle all the paperwork and inspections. Most homeowners are generating power within 3 weeks of signing. ⚙️",
-};
+/* ──────────────────────────────────────────────
+    System Prompt for Solar Context
+    ────────────────────────────────────────────── */
+const SYSTEM_PROMPT = `You are Solar Genius, an AI solar advisor for Enewable, a solar company in Johannesburg, South Africa. 
 
-const DEFAULT_RESPONSE =
-    "Great question! I'd love to help you with that. For a detailed answer tailored to your specific situation, I'd recommend requesting a free quote — our team will design a custom solution for your Joburg home. You can also try the ROI Calculator above for instant savings estimates! 🌞";
+Key facts about Enewable:
+- Based in Johannesburg, Gauteng
+- Specialize in hybrid inverters, lithium-ion batteries, and solar panel installations
+- Team includes: Rob Bagley (CEO/Lead Engineer), Johnathan Bagley (CTO), Michael van Zyl (Sales Director), Leo (Solar Advisor)
+- Rob has 35 years experience with a Mechanical Engineering Diploma from Wits
+- They handle CoCT (City of Cape Town) and Eskom registration
+- Typical installation takes 1-2 days, full process takes 2-3 weeks
+
+Your role:
+- Help visitors understand solar benefits for Johannesburg homes
+- Answer questions about savings, load shedding protection, system sizing
+- Be friendly, helpful, and informative
+- Always recommend requesting a quote for personalized advice
+- Keep responses concise but thorough
+- Use emojis appropriately to make it engaging
+- Never make up information you don't know`;
 
 /* ──────────────────────────────────────────────
-   Component
-   ────────────────────────────────────────────── */
+    Component
+    ────────────────────────────────────────────── */
 export default function SolarGenius() {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
@@ -47,6 +56,12 @@ export default function SolarGenius() {
     const [isTyping, setIsTyping] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+    const chatHistoryRef = useRef<Message[]>([]);
+
+    // Initialize chat history
+    useEffect(() => {
+        chatHistoryRef.current = messages;
+    }, [messages]);
 
     // Scroll to bottom on new messages
     useEffect(() => {
@@ -60,7 +75,28 @@ export default function SolarGenius() {
         }
     }, [isOpen]);
 
-    const handleSend = (text: string) => {
+    const generateResponse = async (userMessage: string): Promise<string> => {
+        try {
+            const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY || "");
+            const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+
+            // Build conversation context
+            const conversationHistory = chatHistoryRef.current
+                .map((msg) => `${msg.role === "user" ? "User" : "Solar Genius"}: ${msg.text}`)
+                .join("\n");
+
+            const fullPrompt = `${SYSTEM_PROMPT}\n\nConversation:\n${conversationHistory}\nUser: ${userMessage}\n\nSolar Genius:`;
+
+            const result = await model.generateContent(fullPrompt);
+            const response = result.response.text();
+            return response;
+        } catch (error) {
+            console.error("Gemini API error:", error);
+            return "I'm having trouble connecting right now. Please try again or request a free quote for personalized assistance! 🌞";
+        }
+    };
+
+    const handleSend = async (text: string) => {
         if (!text.trim()) return;
 
         const userMsg: Message = { role: "user", text: text.trim() };
@@ -68,12 +104,9 @@ export default function SolarGenius() {
         setInput("");
         setIsTyping(true);
 
-        // Simulate typing delay
-        setTimeout(() => {
-            const response = RESPONSES[text.trim()] ?? DEFAULT_RESPONSE;
-            setMessages((prev) => [...prev, { role: "assistant", text: response }]);
-            setIsTyping(false);
-        }, 800 + Math.random() * 600);
+        const response = await generateResponse(text.trim());
+        setMessages((prev) => [...prev, { role: "assistant", text: response }]);
+        setIsTyping(false);
     };
 
     const handleSubmit = (e: React.FormEvent) => {

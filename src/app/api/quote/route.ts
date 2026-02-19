@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Your email where you want to receive quote requests
-const YOUR_EMAIL = "rob@enewable.co.za"; // Update this to your actual email
+const YOUR_EMAIL = "johnathan@zeffkong.com"; // Update this to your actual email
 
 export async function POST(request: Request) {
     try {

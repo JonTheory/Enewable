@@ -11,37 +11,36 @@ const team = [
         name: "Chris Nyawo",
         role: "CEO",
         bio: "Leadership & Vision",
+        credentials: "MBA, Electrical Engineering",
         initials: "CN",
     },
     {
-        name: "CTO",
-        role: "Chief Technology Officer",
-        bio: "Technical Strategy",
-        initials: "MK",
+        name: "Johnathan Bagley",
+        role: "CTO",
+        bio: "Technical Strategy & Innovation",
+        credentials: "MEng, Renewable Energy",
+        initials: "JB",
     },
     {
-        name: "Lead Engineer",
-        role: "Installation Lead",
-        bio: "10+ years experience",
-        initials: "PT",
+        name: "Rob Bagley",
+        role: "Lead Engineer",
+        bio: "Installation & Technical Lead",
+        credentials: "10+ Years Experience, ECSA Certified",
+        initials: "RB",
     },
     {
-        name: "Sales Director",
-        role: "Sales & Customer Relations",
-        bio: "Client Success",
-        initials: "SL",
+        name: "Michael van Zyl",
+        role: "Sales Director",
+        bio: "Client Relations & Growth",
+        credentials: "BCom, Business Development",
+        initials: "MvZ",
     },
     {
-        name: "Operations Manager",
-        role: "Project Coordination",
-        bio: "Logistics & Scheduling",
-        initials: "AR",
-    },
-    {
-        name: "Solar Advisor",
-        role: "Technical Sales",
-        bio: "System Design Expert",
-        initials: "BN",
+        name: "Leo",
+        role: "Solar Advisor",
+        bio: "System Design & Consulting",
+        credentials: "Solar PV Specialist, NABCEP",
+        initials: "L",
     },
 ];
 
@@ -112,7 +111,7 @@ export default function Team() {
                 </motion.div>
 
                 {/* Team Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
                     {team.map((member, i) => (
                         <motion.div
                             key={member.name}
@@ -130,13 +129,18 @@ export default function Team() {
                             </div>
 
                             {/* Name */}
-                            <h3 className="font-heading text-base sm:text-lg font-bold text-white mb-1">
+                            <h3 className="font-heading text-base sm:text-lg font-bold text-white mb-0.5">
                                 {member.name}
                             </h3>
 
                             {/* Role */}
-                            <p className="text-xs text-saffron/80 font-medium mb-2">
+                            <p className="text-xs text-saffron/80 font-medium mb-1">
                                 {member.role}
+                            </p>
+
+                            {/* Credentials */}
+                            <p className="text-[10px] text-zinc-500 italic mb-2">
+                                {member.credentials}
                             </p>
 
                             {/* Bio */}

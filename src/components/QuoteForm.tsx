@@ -60,10 +60,30 @@ export default function QuoteForm() {
         e.preventDefault();
         if (!isValid) return;
         setSending(true);
-        // Simulate API call
-        await new Promise((r) => setTimeout(r, 1800));
-        setSending(false);
-        setSubmitted(true);
+
+        try {
+            const response = await fetch("/api/quote", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    property,
+                    bill,
+                    name,
+                    email,
+                    phone,
+                    area,
+                }),
+            });
+
+            if (!response.ok) throw new Error("Failed to submit");
+
+            setSubmitted(true);
+        } catch (error) {
+            alert("Failed to submit quote request. Please try again.");
+            console.error(error);
+        } finally {
+            setSending(false);
+        }
     };
 
     return (

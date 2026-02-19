@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+/* ============================================
+   ENEWABLE — Design System Tokens
+   Theme: "Dark Luxury Industrial"
+   Accent: Saffron #FED420
+   ============================================ */
+
+@theme inline {
+  /* --- Color Tokens --- */
+  --color-background: #09090b;
+  --color-foreground: #fafafa;
+
+  --color-saffron: #FED420;
+  --color-saffron-50: #FFF9E0;
+  --color-saffron-100: #FFF3C2;
+  --color-saffron-200: #FFE885;
+  --color-saffron-300: #FFDD47;
+  --color-saffron-400: #FED420;
+  --color-saffron-500: #E5BC00;
+  --color-saffron-600: #BF9C00;
+  --color-saffron-700: #997D00;
+  --color-saffron-800: #735E00;
+  --color-saffron-900: #4D3F00;
+  --color-saffron-950: #332A00;
+
+  /* --- Font Families --- */
+  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-heading: var(--font-rajdhani), "Rajdhani", system-ui, sans-serif;
+
+  /* --- Custom Animations --- */
+  --animate-fade-up: fadeUp 0.6s ease-out forwards;
+  --animate-fade-in: fadeIn 0.8s ease-out forwards;
+  --animate-pulse-slow: pulse 4s ease-in-out infinite;
+}
+
+/* --- Keyframes --- */
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes gridScroll {
+  0% { background-position: 0 0; }
+  100% { background-position: 60px 60px; }
+}
+
+/* ============================================
+   Global Base Styles
+   ============================================ */
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+/* Glassmorphism Card */
+.glass {
+  background: rgba(24, 24, 27, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(254, 212, 32, 0.08);
+}
+
+.glass-strong {
+  background: rgba(24, 24, 27, 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(254, 212, 32, 0.12);
+}
+
+/* Blueprint Grid Overlay */
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(254, 212, 32, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(254, 212, 32, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.grid-overlay-dense {
+  background-image:
+    linear-gradient(rgba(254, 212, 32, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(254, 212, 32, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Saffron Text Glow */
+.text-glow {
+  text-shadow: 0 0 20px rgba(254, 212, 32, 0.3);
+}
+
+.text-glow-strong {
+  text-shadow: 0 0 30px rgba(254, 212, 32, 0.5), 0 0 60px rgba(254, 212, 32, 0.2);
+}
+
+/* Saffron Border Glow */
+.border-glow {
+  box-shadow: 0 0 15px rgba(254, 212, 32, 0.15);
+}
+
+/* Selection */
+::selection {
+  background: rgba(254, 212, 32, 0.3);
+  color: #fafafa;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(254, 212, 32, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(254, 212, 32, 0.4);
+}

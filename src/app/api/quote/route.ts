@@ -20,7 +20,7 @@ export async function POST(request: Request) {
 
         // Email to you (the business owner)
         await resend.emails.send({
-            from: "Enewable Quotes <quotes@enewable.co.za>",
+            from: "Enewable Solar <onboarding@resend.dev>",
             to: YOUR_EMAIL,
             subject: `New Quote Request from ${name}`,
             html: `
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
         // Confirmation email to customer (if they provided email)
         if (email) {
             await resend.emails.send({
-                from: "Enewable Solar <hello@enewable.co.za>",
+                from: "Enewable Solar <onboarding@resend.dev>",
                 to: email,
                 subject: "We've Received Your Quote Request! 🌞",
                 html: `
@@ -56,7 +56,6 @@ export async function POST(request: Request) {
                         <li>We'll schedule a free site assessment at your convenience</li>
                         <li>You'll receive a custom system design and quote within 2-3 days</li>
                     </ol>
-                    <p>Questions? Reply to this email or call us at +27 (0) 11 000 0000</p>
                     <p>Power your independence!<br>The Enewable Team</p>
                 `,
             });

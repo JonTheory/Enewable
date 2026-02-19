@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 
 /* ──────────────────────────────────────────────
     Quick Questions
@@ -18,28 +17,6 @@ interface Message {
     role: "user" | "assistant";
     text: string;
 }
-
-/* ──────────────────────────────────────────────
-    System Prompt for Solar Context
-    ────────────────────────────────────────────── */
-const SYSTEM_PROMPT = `You are Solar Genius, an AI solar advisor for Enewable, a solar company in Johannesburg, South Africa. 
-
-Key facts about Enewable:
-- Based in Johannesburg, Gauteng
-- Specialize in hybrid inverters, lithium-ion batteries, and solar panel installations
-- Team includes: Rob Bagley (CEO/Lead Engineer), Johnathan Bagley (CTO), Michael van Zyl (Sales Director), Leo (Solar Advisor)
-- Rob has 35 years experience with a Mechanical Engineering Diploma from Wits
-- They handle CoCT (City of Cape Town) and Eskom registration
-- Typical installation takes 1-2 days, full process takes 2-3 weeks
-
-Your role:
-- Help visitors understand solar benefits for Johannesburg homes
-- Answer questions about savings, load shedding protection, system sizing
-- Be friendly, helpful, and informative
-- Always recommend requesting a quote for personalized advice
-- Keep responses concise but thorough
-- Use emojis appropriately to make it engaging
-- Never make up information you don't know`;
 
 /* ──────────────────────────────────────────────
     Component
@@ -77,21 +54,21 @@ export default function SolarGenius() {
 
     const generateResponse = async (userMessage: string): Promise<string> => {
         try {
-            const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY || "");
-            const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+            const res = await fetch("/api/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    message: userMessage,
+                    history: chatHistoryRef.current.slice(-10), // Last 10 messages
+                }),
+            });
 
-            // Build conversation context
-            const conversationHistory = chatHistoryRef.current
-                .map((msg) => `${msg.role === "user" ? "User" : "Solar Genius"}: ${msg.text}`)
-                .join("\n");
+            if (!res.ok) throw new Error("API failed");
 
-            const fullPrompt = `${SYSTEM_PROMPT}\n\nConversation:\n${conversationHistory}\nUser: ${userMessage}\n\nSolar Genius:`;
-
-            const result = await model.generateContent(fullPrompt);
-            const response = result.response.text();
-            return response;
+            const data = await res.json();
+            return data.response;
         } catch (error) {
-            console.error("Gemini API error:", error);
+            console.error("Chat error:", error);
             return "I'm having trouble connecting right now. Please try again or request a free quote for personalized assistance! 🌞";
         }
     };

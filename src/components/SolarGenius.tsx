@@ -23,14 +23,10 @@ interface Message {
     ────────────────────────────────────────────── */
 export default function SolarGenius() {
     const [isOpen, setIsOpen] = useState(false);
-    const [messages, setMessages] = useState<Message[]>([
-        {
-            role: "assistant",
-            text: "Hey! I'm Solar Genius 🌞 — your AI solar advisor for Johannesburg. Ask me anything about solar savings, load shedding backup, or system sizing.",
-        },
-    ]);
+    const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState("");
     const [isTyping, setIsTyping] = useState(false);
+    const [hasOpenedChat, setHasOpenedChat] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const chatHistoryRef = useRef<Message[]>([]);
@@ -95,7 +91,10 @@ export default function SolarGenius() {
         <>
             {/* ─── FAB Button ─── */}
             <motion.button
-                onClick={() => setIsOpen(!isOpen)}
+                onClick={() => {
+                    setIsOpen(!isOpen);
+                    if (!isOpen) setHasOpenedChat(true);
+                }}
                 whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.93 }}
                 className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-saffron text-zinc-950 shadow-[0_0_30px_rgba(254,212,32,0.3)] flex items-center justify-center cursor-pointer transition-shadow hover:shadow-[0_0_40px_rgba(254,212,32,0.5)]"
@@ -171,7 +170,7 @@ export default function SolarGenius() {
                             </div>
                         </div>
 
-                        {/* Messages */}
+                            {/* Messages */}
                         <div className="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar">
                             {messages.map((msg, i) => (
                                 <motion.div

@@ -3,17 +3,25 @@ import { NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Your email where you want to receive quote requests
 const YOUR_EMAILS = [
-    "johnathan@zeffkong.com",
-    "johnathanbagleysa@gmail.com"
-];
+    process.env.QUOTE_EMAIL_1,
+    process.env.QUOTE_EMAIL_2,
+].filter(Boolean) as string[];
+
+function sanitizeInput(str: string): string {
+    return str.replace(/[<>"'&]/g, "");
+}
+
+function validateEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
 
 export async function POST(request: Request) {
     try {
-        const { property, bill, name, email, phone, area } = await request.json();
+        const body = await request.json();
+        const { property, bill, name, email, phone, area } = body;
 
-        // Validate required fields
         if (!property || !bill || !name || (!email && !phone)) {
             return NextResponse.json(
                 { error: "Please fill in all required fields" },
@@ -21,20 +29,40 @@ export async function POST(request: Request) {
             );
         }
 
-        // Email to you (the business owner) - send to both emails
+        if (email && !validateEmail(email)) {
+            return NextResponse.json(
+                { error: "Invalid email format" },
+                { status: 400 }
+            );
+        }
+
+        const sanitizedName = sanitizeInput(String(name).slice(0, 100));
+        const sanitizedEmail = email ? sanitizeInput(String(email).slice(0, 100)) : "";
+        const sanitizedPhone = phone ? sanitizeInput(String(phone).slice(0, 20)) : "";
+        const sanitizedArea = area ? sanitizeInput(String(area).slice(0, 100)) : "";
+        const sanitizedProperty = sanitizeInput(String(property).slice(0, 50));
+        const sanitizedBill = sanitizeInput(String(bill).slice(0, 50));
+
+        if (YOUR_EMAILS.length === 0) {
+            return NextResponse.json(
+                { error: "Server configuration error" },
+                { status: 500 }
+            );
+        }
+
         const emailPromises = YOUR_EMAILS.map(toEmail => 
             resend.emails.send({
                 from: "Enewable Quotes <quotes@enewable.co.za>",
                 to: toEmail,
-                subject: `New Quote Request from ${name}`,
+                subject: `New Quote Request from ${sanitizedName}`,
                 html: `
                     <h2>New Solar Quote Request</h2>
-                    <p><strong>Name:</strong> ${name}</p>
-                    <p><strong>Email:</strong> ${email || "Not provided"}</p>
-                    <p><strong>Phone:</strong> ${phone || "Not provided"}</p>
-                    <p><strong>Area:</strong> ${area || "Not provided"}</p>
-                    <p><strong>Property Type:</strong> ${property}</p>
-                    <p><strong>Monthly Bill:</strong> ${bill}</p>
+                    <p><strong>Name:</strong> ${sanitizedName}</p>
+                    <p><strong>Email:</strong> ${sanitizedEmail || "Not provided"}</p>
+                    <p><strong>Phone:</strong> ${sanitizedPhone || "Not provided"}</p>
+                    <p><strong>Area:</strong> ${sanitizedArea || "Not provided"}</p>
+                    <p><strong>Property Type:</strong> ${sanitizedProperty}</p>
+                    <p><strong>Monthly Bill:</strong> ${sanitizedBill}</p>
                     <hr>
                     <p>Submitted: ${new Date().toLocaleString("en-ZA")}</p>
                 `,
@@ -43,19 +71,18 @@ export async function POST(request: Request) {
         
         await Promise.all(emailPromises);
 
-        // Confirmation email to customer (if they provided email)
-        if (email) {
+        if (sanitizedEmail && validateEmail(sanitizedEmail)) {
             await resend.emails.send({
                 from: "Enewable Quotes <quotes@enewable.co.za>",
-                to: email,
+                to: sanitizedEmail,
                 subject: "We've Received Your Quote Request! 🌞",
                 html: `
-                    <h2>Hi ${name},</h2>
+                    <h2>Hi ${sanitizedName},</h2>
                     <p>Thank you for requesting a solar quote from Enewable!</p>
                     <p>We've received your details and our team will review your requirements:</p>
                     <ul>
-                        <li><strong>Property:</strong> ${property}</li>
-                        <li><strong>Current Bill:</strong> ${bill}</li>
+                        <li><strong>Property:</strong> ${sanitizedProperty}</li>
+                        <li><strong>Current Bill:</strong> ${sanitizedBill}</li>
                     </ul>
                     <p><strong>What happens next?</strong></p>
                     <ol>

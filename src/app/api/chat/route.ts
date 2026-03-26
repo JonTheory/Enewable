@@ -33,7 +33,9 @@ function getPricingData() {
                 pricingContent += `\n\n--- ${file.replace(".md", "").toUpperCase()} ---\n${content}`;
             }
         } catch (error) {
-            console.error(`Error reading ${file}:`, error);
+            if (process.env.NODE_ENV === 'development') {
+                console.error(`Error reading ${file}:`, error);
+            }
         }
     }
 
@@ -189,7 +191,9 @@ export async function POST(request: Request) {
         return NextResponse.json({ response });
 
     } catch (error) {
-        console.error("API Error:", error);
+        if (process.env.NODE_ENV === 'development') {
+            console.error("API Error:", error);
+        }
         return NextResponse.json(
             { error: "I'm having trouble thinking right now. Give me a moment and try again! 🌞" },
             { status: 500 }

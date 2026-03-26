@@ -1,5 +1,7 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -8,17 +10,68 @@ const YOUR_EMAILS = [
     process.env.QUOTE_EMAIL_2,
 ].filter(Boolean) as string[];
 
+// Rate limiter for quote submissions - only initialize if Redis is configured
+const hasRedis = process.env.UPSTASH_REDIS_REST_URL
+    && !process.env.UPSTASH_REDIS_REST_URL.includes("your-redis-url")
+    && process.env.UPSTASH_REDIS_REST_TOKEN
+    && !process.env.UPSTASH_REDIS_REST_TOKEN.includes("your-redis-token");
+
+const ratelimit = hasRedis
+    ? new Ratelimit({
+        redis: Redis.fromEnv(),
+        limiter: Ratelimit.slidingWindow(3, "60 s"), // 3 quote requests per minute
+        prefix: "enewable-quote",
+    })
+    : null;
+
 function sanitizeInput(str: string): string {
     return str.replace(/[<>"'&]/g, "");
 }
 
 function validateEmail(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    // More robust email validation
+    // Allows standard email formats while blocking obvious fakes
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+    // Basic validation
+    if (!emailRegex.test(email)) {
+        return false;
+    }
+
+    // Additional checks
+    const parts = email.split('@');
+    if (parts.length !== 2) return false;
+
+    const [localPart, domain] = parts;
+
+    // Check length constraints
+    if (localPart.length > 64 || domain.length > 255) {
+        return false;
+    }
+
+    // Check for valid TLD (at least 2 chars)
+    const domainParts = domain.split('.');
+    if (domainParts.length < 2 || domainParts[domainParts.length - 1].length < 2) {
+        return false;
+    }
+
+    return true;
 }
 
 export async function POST(request: Request) {
     try {
+        // Rate limiting check
+        if (ratelimit) {
+            const identifier = request.headers.get("x-forwarded-for") || "global";
+            const { success } = await ratelimit.limit(identifier);
+            if (!success) {
+                return NextResponse.json(
+                    { error: "Too many quote requests. Please wait a moment and try again." },
+                    { status: 429 }
+                );
+            }
+        }
+
         const body = await request.json();
         const { property, bill, name, email, phone, area } = body;
 
@@ -102,7 +155,9 @@ export async function POST(request: Request) {
         });
 
     } catch (error) {
-        console.error("Quote submission error:", error);
+        if (process.env.NODE_ENV === 'development') {
+            console.error("Quote submission error:", error);
+        }
         return NextResponse.json(
             { error: "Failed to submit quote request. Please try again." },
             { status: 500 }

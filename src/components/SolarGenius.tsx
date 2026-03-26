@@ -64,7 +64,9 @@ export default function SolarGenius() {
             const data = await res.json();
             return data.response;
         } catch (error) {
-            console.error("Chat error:", error);
+            if (process.env.NODE_ENV === 'development') {
+                console.error("Chat error:", error);
+            }
             return "I'm having trouble connecting right now. Please try again or request a free quote for personalized assistance! 🌞";
         }
     };

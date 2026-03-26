@@ -80,7 +80,9 @@ export default function QuoteForm() {
             setSubmitted(true);
         } catch (error) {
             alert("Failed to submit quote request. Please try again.");
-            console.error(error);
+            if (process.env.NODE_ENV === 'development') {
+                console.error(error);
+            }
         } finally {
             setSending(false);
         }

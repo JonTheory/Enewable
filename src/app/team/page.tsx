@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import Team from "@/components/Team";
 
 export const metadata: Metadata = {
-  title: "Our Team | Enewable - Solar Experts Johannesburg",
+  title: "Our Team | Enewable - Solar Experts South Africa",
   description: "Meet the Enewable team - Rob Bagley (CEO), Johnathan Bagley (CTO), Michael van Zyl (Sales Director), and Leo (Solar Advisor). 35+ years combined experience in solar energy.",
 };
 

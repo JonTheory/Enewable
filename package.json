@@ -1,5 +1,5 @@
 {
-  "name": "enewable",
+  "name": "enewable-website",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -20,7 +20,7 @@
     "resend": "^6.9.2",
     "tar": "^7.5.9",
     "undici": "^7.22.0",
-    "vercel": "^41.0.2"
+    "vercel": "^41.7.8"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

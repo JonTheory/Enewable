@@ -10,20 +10,28 @@ import Image from "next/image";
     ────────────────────────────────────────────── */
 const team = [
     {
+        name: "Chris Nyawo",
+        role: "Principal Stakeholder",
+        bio: "As a visionary entrepreneur and leader, Chris drives Enewable's mission to power South Africa with clean, reliable energy. His leadership ensures we deliver exceptional solar solutions to every client.",
+        credentials: "Leadership | Visionary",
+        initials: "CN",
+        image: "/images/team/Chris.jpeg",
+    },
+    {
         name: "Rob Bagley",
-        role: "CEO / Lead Engineer",
-        bio: "With 35 years of engineering experience and a Mechanical Engineering Diploma from Wits Technikon, Rob leads our technical operations and installations. His expertise in solar system design ensures every installation meets the highest standards.",
-        credentials: "35 Years Experience | Mechanical Engineer Diploma (Wits) | ECSA Registered",
+        role: "CEO & Lead Engineer",
+        bio: "Rob brings 35+ years of hands-on engineering experience and a ND in Mechanical Engineering to every project. As our CEO & Lead Engineer, his expertise ensures every installation meets the highest standards.",
+        credentials: "ND Mech Eng | ECSA Registered",
         initials: "RB",
         image: "/images/team/Rob.png",
     },
     {
         name: "Johnathan Bagley",
-        role: "CTO",
-        bio: "Johnathan holds a BSc in Chemical Engineering and brings marketing expertise to our technical strategy. He ensures we stay at the forefront of solar technology, bringing the latest advances to Johannesburg homes.",
-        credentials: "BSc Chem Eng | Marketing Consultant",
+        role: "Technical Consultant",
+        bio: "Johnathan holds a BSc in Chemical Engineering and brings technical expertise to our customer solutions. He ensures we stay at the forefront of solar technology, bringing the latest advances to South African homes.",
+        credentials: "BSc Chem Eng | Technical Expert",
         initials: "JB",
-        image: null,
+        image: "/images/team/John.jpeg",
     },
     {
         name: "Michael van Zyl",
@@ -106,7 +114,7 @@ export default function Team() {
                     <p className="mt-6 max-w-2xl mx-auto text-zinc-300 text-lg sm:text-xl">
                         Our team brings together 35+ years of combined experience in engineering, 
                         renewable energy, and customer service. We&apos;re dedicated to powering 
-                        Johannesburg&apos;s transition to clean, reliable energy.
+                        South Africa&apos;s transition to clean, reliable energy.
                     </p>
                 </motion.div>
 
@@ -180,7 +188,7 @@ export default function Team() {
                         <p className="text-sm text-zinc-400 mt-1">Years Combined Experience</p>
                     </div>
                     <div className="text-center">
-                        <p className="text-3xl sm:text-4xl font-bold text-saffron">400+</p>
+                        <p className="text-3xl sm:text-4xl font-bold text-saffron">28+</p>
                         <p className="text-sm text-zinc-400 mt-1">Homes Powered</p>
                     </div>
                     <div className="text-center">

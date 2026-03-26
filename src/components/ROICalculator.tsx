@@ -7,19 +7,26 @@ import { useRef } from "react";
 /* ──────────────────────────────────────────────
    Constants & Helpers
    ────────────────────────────────────────────── */
-const MIN_BILL = 1500;
-const MAX_BILL = 10000;
-const STEP = 100;
+const RESIDENTIAL_MIN_BILL = 1500;
+const RESIDENTIAL_MAX_BILL = 15000;
+const RESIDENTIAL_STEP = 100;
+
+const COMMERCIAL_MIN_BILL = 5000;
+const COMMERCIAL_MAX_BILL = 100000;
+const COMMERCIAL_STEP = 1000;
 
 // Eskom avg annual tariff increase (%)
 const ESKOM_ANNUAL_INCREASE = 12;
 // Average solar offset percentage for JHB rooftop
 const SOLAR_OFFSET_PCT = 0.72;
+// Commercial typically has higher offset due to daytime usage
+const COMMERCIAL_OFFSET_PCT = 0.80;
 // Load shedding hours avoided per month (proportional to system size)
 const BASE_LS_HOURS = 6;
 const MAX_LS_HOURS = 14;
 // Estimated system cost per R of monthly bill
-const SYSTEM_COST_MULTIPLIER = 28;
+const RESIDENTIAL_COST_MULTIPLIER = 28;
+const COMMERCIAL_COST_MULTIPLIER = 22;
 // Years for ROI projection
 const PROJECTION_YEARS = 25;
 
@@ -34,8 +41,11 @@ function formatZAR(value: number): string {
         .replace("ZAR", "R");
 }
 
-function calculateSavings(monthlyBill: number) {
-    const monthlySaving = Math.round(monthlyBill * SOLAR_OFFSET_PCT);
+function calculateSavings(monthlyBill: number, isCommercial: boolean) {
+    const offsetPct = isCommercial ? COMMERCIAL_OFFSET_PCT : SOLAR_OFFSET_PCT;
+    const costMultiplier = isCommercial ? COMMERCIAL_COST_MULTIPLIER : RESIDENTIAL_COST_MULTIPLIER;
+    
+    const monthlySaving = Math.round(monthlyBill * offsetPct);
     const annualSaving = monthlySaving * 12;
 
     // Compounded savings over projection period (accounting for Eskom increases)
@@ -46,13 +56,15 @@ function calculateSavings(monthlyBill: number) {
         currentAnnualSaving *= 1 + ESKOM_ANNUAL_INCREASE / 100;
     }
 
-    const systemCost = monthlyBill * SYSTEM_COST_MULTIPLIER;
-    const paybackMonths = Math.ceil(systemCost / monthlySaving);
+    const systemCost = monthlyBill * costMultiplier;
+    const paybackMonths = monthlySaving > 0 ? Math.ceil(systemCost / monthlySaving) : 999;
     const paybackYears = Math.floor(paybackMonths / 12);
     const paybackRemainderMonths = paybackMonths % 12;
 
-    // Load shedding hours proportional to bill
-    const billRatio = (monthlyBill - MIN_BILL) / (MAX_BILL - MIN_BILL);
+    // Load shedding hours proportional to bill (commercial may have generators so less relevant)
+    const minBill = isCommercial ? COMMERCIAL_MIN_BILL : RESIDENTIAL_MIN_BILL;
+    const maxBill = isCommercial ? COMMERCIAL_MAX_BILL : RESIDENTIAL_MAX_BILL;
+    const billRatio = Math.min(1, Math.max(0, (monthlyBill - minBill) / (maxBill - minBill)));
     const lsHoursAvoided = Math.round(BASE_LS_HOURS + billRatio * (MAX_LS_HOURS - BASE_LS_HOURS));
 
     return {
@@ -87,9 +99,14 @@ const fadeUp = {
    Component
    ────────────────────────────────────────────── */
 export default function ROICalculator() {
+    const [propertyType, setPropertyType] = useState<"residential" | "commercial">("residential");
     const [monthlyBill, setMonthlyBill] = useState(3500);
     const sectionRef = useRef<HTMLElement>(null);
     const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
+
+    const minBill = propertyType === "residential" ? RESIDENTIAL_MIN_BILL : COMMERCIAL_MIN_BILL;
+    const maxBill = propertyType === "residential" ? RESIDENTIAL_MAX_BILL : COMMERCIAL_MAX_BILL;
+    const step = propertyType === "residential" ? RESIDENTIAL_STEP : COMMERCIAL_STEP;
 
     const handleSliderChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,8 +115,13 @@ export default function ROICalculator() {
         []
     );
 
-    const results = useMemo(() => calculateSavings(monthlyBill), [monthlyBill]);
-    const sliderPercent = ((monthlyBill - MIN_BILL) / (MAX_BILL - MIN_BILL)) * 100;
+    const handlePropertyTypeChange = useCallback((type: "residential" | "commercial") => {
+        setPropertyType(type);
+        setMonthlyBill(type === "residential" ? 3500 : 15000);
+    }, []);
+
+    const results = useMemo(() => calculateSavings(monthlyBill, propertyType === "commercial"), [monthlyBill, propertyType]);
+    const sliderPercent = ((monthlyBill - minBill) / (maxBill - minBill)) * 100;
 
     return (
         <section
@@ -140,7 +162,7 @@ export default function ROICalculator() {
                     </h2>
                     <p className="mt-4 max-w-lg mx-auto text-zinc-300 text-base sm:text-lg">
                         Slide to your current Eskom bill and watch the numbers work in your
-                        favour. Based on Johannesburg&apos;s average 2,500+ sun hours per year.
+                        favour. Based on South Africa&apos;s average 2,500+ sun hours per year.
                     </p>
                 </motion.div>
 
@@ -149,12 +171,40 @@ export default function ROICalculator() {
                     variants={fadeUp}
                     className="glass rounded-2xl p-6 sm:p-10 border border-zinc-800/50"
                 >
+                    {/* ─── Property Type Toggle ─── */}
+                    <div className="flex justify-center mb-8">
+                        <div className="inline-flex rounded-xl border border-zinc-800/50 bg-zinc-900/40 p-1">
+                            <button
+                                type="button"
+                                onClick={() => handlePropertyTypeChange("residential")}
+                                className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                                    propertyType === "residential"
+                                        ? "bg-saffron/10 text-saffron border border-saffron/30"
+                                        : "text-zinc-400 hover:text-zinc-200"
+                                }`}
+                            >
+                                🏠 Homeowners
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => handlePropertyTypeChange("commercial")}
+                                className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                                    propertyType === "commercial"
+                                        ? "bg-saffron/10 text-saffron border border-saffron/30"
+                                        : "text-zinc-400 hover:text-zinc-200"
+                                }`}
+                            >
+                                🏢 Commercial
+                            </button>
+                        </div>
+                    </div>
+
                     {/* ─── Slider Section ─── */}
                     <div className="mb-10">
                         <div className="flex items-end justify-between mb-6">
                             <div>
                                 <p className="text-xs text-zinc-300 uppercase tracking-wider mb-1">
-                                    Current Monthly Eskom Bill
+                                    {propertyType === "residential" ? "Home" : "Business"} Monthly Eskom Bill
                                 </p>
                                 <p className="font-heading text-4xl sm:text-5xl font-bold text-white">
                                     {formatZAR(monthlyBill)}
@@ -190,9 +240,9 @@ export default function ROICalculator() {
                             {/* Native range input */}
                             <input
                                 type="range"
-                                min={MIN_BILL}
-                                max={MAX_BILL}
-                                step={STEP}
+                                min={minBill}
+                                max={maxBill}
+                                step={step}
                                 value={monthlyBill}
                                 onChange={handleSliderChange}
                                 className="relative z-10 w-full appearance-none bg-transparent cursor-pointer
@@ -221,8 +271,8 @@ export default function ROICalculator() {
 
                         {/* Range labels */}
                         <div className="flex justify-between mt-2 text-[11px] text-zinc-700">
-                            <span>{formatZAR(MIN_BILL)}</span>
-                            <span>{formatZAR(MAX_BILL)}+</span>
+                            <span>{formatZAR(minBill)}</span>
+                            <span>{formatZAR(maxBill)}+</span>
                         </div>
                     </div>
 
@@ -323,7 +373,7 @@ export default function ROICalculator() {
 
                     {/* Disclaimer */}
                     <p className="mt-5 text-[10px] text-zinc-700 text-center leading-relaxed">
-                        * Estimates based on average Johannesburg solar irradiance (5.5
+                        * Estimates based on average South African solar irradiance (5.5
                         kWh/m²/day), north-facing roof, and current Eskom municipal
                         tariffs. Actual results may vary based on roof orientation,
                         shading, and consumption patterns. System sizing subject to site

@@ -139,8 +139,8 @@ export default function FeaturesSection() {
                     </div>
 
                     <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
-                        Built to Keep{" "}
-                        <span className="text-saffron">Joburg Powered.</span>
+                        Built to Keep South Africa{" "}
+                        <span className="text-saffron">Powered.</span>
                     </h2>
 
                     <p className="mt-4 max-w-xl text-zinc-300 text-base sm:text-lg leading-relaxed">

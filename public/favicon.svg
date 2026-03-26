@@ -1,0 +1,17 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" fill="#111111"/>
+  <g transform="translate(32, 32) scale(1.4)">
+    <!-- Center circle -->
+    <circle r="13" fill="#F5C107"/>
+
+    <!-- 8 rays -->
+    <rect x="-2.5" y="19" width="5" height="13" rx="2.5" fill="#F5C107"/>
+    <rect x="-2.5" y="19" width="5" height="13" rx="2.5" fill="#F5C107" transform="rotate(45)"/>
+    <rect x="-2.5" y="19" width="5" height="13" rx="2.5" fill="#F5C107" transform="rotate(90)"/>
+    <rect x="-2.5" y="19" width="5" height="13" rx="2.5" fill="#F5C107" transform="rotate(135)"/>
+    <rect x="-2.5" y="19" width="5" height="13" rx="2.5" fill="#F5C107" transform="rotate(180)"/>
+    <rect x="-2.5" y="19" width="5" height="13" rx="2.5" fill="#F5C107" transform="rotate(225)"/>
+    <rect x="-2.5" y="19" width="5" height="13" rx="2.5" fill="#F5C107" transform="rotate(270)"/>
+    <rect x="-2.5" y="19" width="5" height="13" rx="2.5" fill="#F5C107" transform="rotate(315)"/>
+  </g>
+</svg>

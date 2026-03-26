@@ -88,7 +88,7 @@ export default function Testimonials() {
                         </span>
                     </div>
                     <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
-                        Joburg Homeowners{" "}
+                        South African Homeowners{" "}
                         <span className="text-saffron">Love Their Solar.</span>
                     </h2>
                     <p className="mt-4 max-w-lg text-zinc-300 text-base sm:text-lg">

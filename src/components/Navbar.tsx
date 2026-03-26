@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import SunLogo from "./SunLogo";
 
 /* ──────────────────────────────────────────────
    Component
@@ -47,26 +48,15 @@ export default function Navbar() {
                 <div className="max-w-7xl mx-auto px-6 sm:px-8">
                     <div className="flex items-center justify-between h-16 sm:h-18">
                         {/* ─── Logo ─── */}
-                        <a href="/" className="flex items-center gap-2.5 group">
-                            {/* Logo Icon */}
-                            <div className="relative w-8 h-8 flex items-center justify-center">
-                                <div className="absolute inset-0 rounded-lg bg-saffron/10 group-hover:bg-saffron/20 transition-colors duration-300" />
-                                <svg
-                                    className="w-5 h-5 text-saffron relative z-10"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="1.5"
-                                >
-                                    <circle cx="12" cy="12" r="4" />
-                                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-                                </svg>
-                            </div>
+                        <a href="/" className="flex items-center gap-3 group">
+                            {/* Sun Logo */}
+                            <SunLogo
+                                size="header"
+                                className="text-saffron transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(245,193,7,0.5)]"
+                            />
                             {/* Wordmark */}
-                            <span className="font-heading text-xl font-bold tracking-tight text-white">
-                                ene
-                                <span className="text-saffron">w</span>
-                                able
+                            <span className="font-heading text-xl font-extrabold tracking-tight text-white" style={{letterSpacing: '-0.03em'}}>
+                                ene<span className="text-saffron">w</span>able
                             </span>
                         </a>
 
@@ -175,7 +165,7 @@ export default function Navbar() {
                                 transition={{ delay: 0.5 }}
                                 className="absolute bottom-12 text-xs text-zinc-300 tracking-wide"
                             >
-                                ⚡ Powering 400+ Gauteng Homes
+                                ⚡ Powering 28+ Gauteng Homes
                             </motion.p>
                         </motion.div>
                     </motion.div>

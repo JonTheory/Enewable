@@ -93,7 +93,7 @@ const stats = [
    ────────────────────────────────────────────── */
 export default function HeroSection() {
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-0">
             {/* ─── Background Layers ─── */}
             <div className="absolute inset-0 bg-zinc-950" />
 
@@ -129,12 +129,6 @@ export default function HeroSection() {
                 }}
             />
 
-            {/* Decorative corner brackets */}
-            <div className="absolute top-8 left-8 w-16 h-16 border-l border-t border-saffron/10" />
-            <div className="absolute top-8 right-8 w-16 h-16 border-r border-t border-saffron/10" />
-            <div className="absolute bottom-8 left-8 w-16 h-16 border-l border-b border-saffron/10" />
-            <div className="absolute bottom-8 right-8 w-16 h-16 border-r border-b border-saffron/10" />
-
             {/* ─── Content ─── */}
             <motion.div
                 className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 text-center"
@@ -144,9 +138,9 @@ export default function HeroSection() {
             >
                 {/* Badge */}
                 <motion.div variants={fadeUp} className="mb-8">
-                    <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium tracking-widest uppercase text-saffron">
+                    <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/60 text-xs font-medium tracking-widest uppercase text-saffron">
                         <span className="w-1.5 h-1.5 rounded-full bg-saffron animate-pulse" />
-                        Powering Johannesburg Homes
+                        Powering African Homes & Businesses
                     </span>
                 </motion.div>
 
@@ -164,12 +158,11 @@ export default function HeroSection() {
                     variants={fadeUp}
                     className="mt-6 max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-zinc-300 leading-relaxed"
                 >
-                    The sunniest city in the world deserves better energy.{" "}
+                    In the heart of Johannesburg, where the days are bright and the pace is relentless, your energy should match your vision.{" "}
                     <span className="text-zinc-200">
-                        Cut your Eskom bill, beat Load Shedding,
+                        Cut your Eskom bill, outsmart load shedding,
                     </span>{" "}
-                    and take control of your power with smart solar solutions engineered
-                    for the Highveld.
+                    and take full control of your power with intelligent solar solutions built for homes and businesses across South Africa and the African continent.
                 </motion.p>
 
                 {/* CTA Buttons */}
@@ -235,7 +228,7 @@ export default function HeroSection() {
                     variants={fadeIn}
                     className="mt-6 text-xs text-zinc-300 tracking-wide"
                 >
-                    ⚡ Trusted by 400+ Gauteng homeowners &nbsp;•&nbsp; SABS Approved
+                    ⚡ Trusted by 28+ Gauteng homeowners &nbsp;•&nbsp; SABS Approved
                     Installations
                 </motion.p>
 
